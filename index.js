@@ -186,5 +186,9 @@ client.on(Events.InteractionCreate, async interaction => {
 }
   }
 });
+console.log('TOKEN EXISTS:', !!process.env.TOKEN);
 
+client.login(process.env.TOKEN).catch((error) => {
+  console.error('DISCORD LOGIN ERROR:', error);
+});
 client.login(process.env.TOKEN);
