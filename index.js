@@ -27,6 +27,8 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
 });
 
+
+
 client.on('error', (error) => {
   console.error('CLIENT ERROR:', error);
 });
@@ -194,10 +196,9 @@ client.on(Events.InteractionCreate, async interaction => {
 }
   }
 });
+
 console.log('TOKEN EXISTS:', !!process.env.TOKEN);
 
 client.login(process.env.TOKEN)
   .then(() => console.log('Discord login successful'))
-  .catch((error) => {
-    console.error('DISCORD LOGIN ERROR:', error);
-  });
+  .catch(err => console.error('DISCORD LOGIN ERROR:', err));
