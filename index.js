@@ -27,6 +27,14 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
 });
 
+client.on('error', (error) => {
+  console.error('CLIENT ERROR:', error);
+});
+
+process.on('unhandledRejection', (error) => {
+  console.error('UNHANDLED REJECTION:', error);
+});
+
 // TEMP storage for verification codes
 const verificationData = {};
 
