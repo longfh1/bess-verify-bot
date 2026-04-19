@@ -27,6 +27,33 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
 });
 
+client.on('warn', (info) => {
+  console.log('CLIENT WARN:', info);
+});
+
+client.on('debug', (info) => {
+  console.log('CLIENT DEBUG:', info);
+});
+
+client.on('shardReady', (id) => {
+  console.log(`SHARD READY: ${id}`);
+});
+
+client.on('shardDisconnect', (event, id) => {
+  console.log(`SHARD DISCONNECT: ${id}`, event?.code);
+});
+
+client.on('shardError', (error, id) => {
+  console.error(`SHARD ERROR: ${id}`, error);
+});
+
+client.on('shardReconnecting', (id) => {
+  console.log(`SHARD RECONNECTING: ${id}`);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('UNCAUGHT EXCEPTION:', error);
+});
 
 
 client.on('error', (error) => {
@@ -201,7 +228,12 @@ const token = process.env.TOKEN?.trim();
 
 console.log('TOKEN EXISTS:', !!token);
 console.log('TOKEN LENGTH:', token ? token.length : 0);
+console.log('ABOUT TO LOGIN TO DISCORD');
 
 client.login(token)
   .then(() => console.log('Discord login successful'))
   .catch(err => console.error('DISCORD LOGIN ERROR:', err));
+
+setTimeout(() => {
+  console.log('LOGIN STILL WAITING AFTER 10 SECONDS');
+}, 10000);
